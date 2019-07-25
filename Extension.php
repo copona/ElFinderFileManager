@@ -11,38 +11,33 @@ class Extension extends ExtensionBase {
      */
     public function details() {
         return [
-          'name'        => 'Elfinder File Manager', // Name, nosaukums.
-          'description' => ''
+            'name'        => 'Elfinder File Manager', // Name, nosaukums.
+            'description' => ''
         ];
     }
 
     public function initAdmin() {
 
-        $this->hook = $this->registry->get('hook');
-        $this->hook->setHook('admin/menu/design', [$this, 'addElfinderToAdminMenu']);
+        $location = 'admin/menu/design';
+
+        $this->registry->get('hook')->setHook($location, [$this, 'addToAdminMenu']);
     }
 
+    public function addToAdminMenu(&$data): void {
 
-    public function addElfinderToAdminMenu(&$data): void {
+        $id = 'elfindermanager';
+        $route = 'common/elfinder';
+        $link_name = 'Elfinder File Manager';
 
-        $this->user = $this->registry->get('user');
-        $this->url = $this->registry->get('url');
-        $this->session = $this->registry->get('session');
-
-        // $data[]['elfinder_manager'] = [
-        $data[] = [
-          'id'       => 'elfindermanager',
-          'icon'     => 'fa-tags',
-          'name'     => "<span style='color: green;'>Elfinder File Manager</span>",
-            // 'target' => "_blank",
-          'denied'   => ($this->user->hasPermission('access', 'extension/module/country_of_the_day') ? false : true),
-          'href'     => $this->url->link("common/elfinder", "&token=" . $this->session->data['token']),
-          'children' => []
-        ];
-
-        // prd($data);
-
+        if ($this->registry->get('user')->hasPermission('access', $route)) {
+            $data[] = [
+                'id'       => $id,
+                'icon'     => 'fa-tags',
+                'name'     => '<span style="color: green;">' . $link_name . '</span>',
+                'href'     => $this->registry->get('url')->link($route, 'token=' . $this->registry->get('session')->data('token'), true),
+                'denied'   => ($this->registry->get('user')->hasPermission('access', $route) ? false : true), // available in the future. Taken from DEV repo.
+                'children' => [],
+            ];
+        }
     }
-
-
 }
