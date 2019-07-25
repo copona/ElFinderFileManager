@@ -63,9 +63,9 @@ class ControllerCommonElfinder extends Controller {
 
         // Attach styles
         // $this->document->addStyle('/admin/view/assets/jquery-ui/jquery-ui.min.css');
+        $this->document->addStyle('//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css');
         $this->document->addStyle('/extensions/Copona/ElFinderFileManager/system/library/elfinder/css/elfinder.min.css');
         $this->document->addStyle('/extensions/Copona/ElFinderFileManager/system/library/elfinder/css/theme.css');
-        $this->document->addStyle('//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css');
 
 
         // Attach scripts
