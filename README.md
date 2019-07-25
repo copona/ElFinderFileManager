@@ -1,7 +1,7 @@
 # ElFinderFileManager
 First official plugin for Copona system. Uses Elfinder as FileManager in Admin
 
-![Proof](https://raw.githubusercontent.com/copona/ElFinderFileManager/master/demo.png)
+![Proof](demo.png)
 
 # Installation
 
